@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Web Audio API</title>
+    </head>
+    <body>
+        <h1>Welcome to the Web Audio API</h1>
+        <script>
+            var context = new AudioContext(),
+                request = new XMLHttpRequest();
+
+            request.open('GET', 'my.mp3', true);
+            request.responseType = 'arraybuffer';
+
+            request.onload = function () {
+                var undecodedAudio = request.response;
+
+                context.decodeAudioData(undecodedAudio, function (buffer) {
+                    var sourceBuffer = context.createBufferSource();
+
+                    sourceBuffer.buffer = buffer;
+                    sourceBuffer.connect(context.destination);
+                    sourceBuffer.start(context.currentTime);
+                });
+            };
+
+            request.send();
+        </script>
+    </body>
+</html> 

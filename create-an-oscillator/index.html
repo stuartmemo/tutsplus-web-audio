@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Web Audio API</title>
+    </head>
+    <body>
+        <h1>Welcome to the Web Audio API</h1>
+        <script>
+            var context = new AudioContext(),
+                oscillator = context.createOscillator();
+
+            // Connect the oscillator to our speakers
+            oscillator.connect(context.destination);
+
+            // Start the oscillator now
+            oscillator.start(context.currentTime);
+
+            // Stop the oscillator 3 seconds from now
+            oscillator.stop(context.currentTime + 3);
+        </script>
+    </body>
+</html> 
